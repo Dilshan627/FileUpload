@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>uploader</title>
+    <style>
+        .container {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-container {
+
+        }
+
+        .view-container {
+            height: 50%;
+            width: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn {
+            background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
+            border: 0;
+            border-radius: 8px;
+            box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+            box-sizing: border-box;
+            color: #FFFFFF;
+            font-family: Phantomsans, sans-serif;
+            font-size: 12px;
+            line-height: 0.1em;
+            max-width: 50%;
+            min-width: 70px;
+            padding: 19px 24px;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="view-container">view</div>
+    <div class="input-container">
+        <form id="formData" >
+            <input type="file" name="file"/>
+            <button class="btn" id="btnUpload">Upload Files</button>
+        </form>
+    </div>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    let baseURL = "http://localhost:8080/Back_End_war/";
+
+    $("#btnUpload").click(function () {
+        var formData = $("#formData").serialize();
+
+        console.log("ghvghv")
+
+        $.ajax({
+            url: baseURL + "photos",
+            method: "post",
+            data: formData,
+            dataType: "json"
+        });
+
+    });
+
+</script>
+</html>
