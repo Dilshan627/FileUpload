@@ -1,14 +1,14 @@
 package lk.ijse.spring.config;
 
+import lk.ijse.spring.advicer.AppWideExceptionHandler;
+import lk.ijse.spring.controller.fileUploadController;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@ComponentScan(basePackages = "lk.ijse.spring.controller")
+@ComponentScan(basePackageClasses = {fileUploadController.class, AppWideExceptionHandler.class})
 @EnableWebMvc
-public class WebAppConfig implements WebMvcConfigurer {
+public class WebAppConfig {
 
 }
