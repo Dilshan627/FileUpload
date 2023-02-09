@@ -21,38 +21,6 @@ public class fileUploadController {
 
     private static final ArrayList<String> allImages = new ArrayList<>();
 
-    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity uploadFile(@RequestPart("myFile") MultipartFile myFile, @RequestPart("myFile") byte[] isFile, @RequestPart("myFile") Part myPart) {
-
-
-        System.out.println(isFile);
-        System.out.println(myPart.getSubmittedFileName());
-
-        System.out.println(myFile.getOriginalFilename());
-        System.out.println(myPart.getSubmittedFileName());
-
-        try {
-
-            String projectPath = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getAbsolutePath();
-
-            File uploadsDir = new File(projectPath + "/uploads");
-            uploadsDir.mkdir();
-
-            myFile.transferTo(new File(uploadsDir.getAbsolutePath() + "/" + myFile.getOriginalFilename()));
-
-            return new ResponseEntity("Successfully Uploaded", HttpStatus.OK);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-
-    }
-
-
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity uploadFileWithSpringWay(@RequestPart("myFile") MultipartFile myFile) {
         try {
