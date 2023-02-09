@@ -15,10 +15,6 @@
             justify-content: center;
         }
 
-        .input-container {
-
-        }
-
         .view-container {
             height: 50%;
             width: 25%;
@@ -56,10 +52,12 @@
 <div class="container">
     <div class="view-container">view</div>
     <div class="input-container">
-        <form id="formData" >
-            <input type="file" name="file"/>
-            <button class="btn" id="btnUpload">Upload Files</button>
+
+        <form id="fileUploadForm">
+            <input type="file" id="fileInput" multiple>
+            <button type="button" id="uploadButton">Upload</button>
         </form>
+
     </div>
 </div>
 
@@ -67,18 +65,46 @@
 <script>
     let baseURL = "http://localhost:8080/Back_End_war/";
 
-    $("#btnUpload").click(function () {
-        var formData = $("#formData").serialize();
+    // $("#btnUpload").click(function () {
+    //     var formData = $("#formData").serialize();
+    //
+    //     console.log("ghvghv")
+    //
+    //     $.ajax({
+    //         url: baseURL + "upload",
+    //         method: "post",
+    //         data: formData,
+    //         dataType: "json"
+    //     });
+    //
+    // });
 
-        console.log("ghvghv")
 
-        $.ajax({
-            url: baseURL + "upload",
-            method: "post",
-            data: formData,
-            dataType: "json"
-        });
+    const form = document.getElementById('fileUploadForm');
+    const input = document.getElementById('fileInput');
+    const uploadButton = document.getElementById('uploadButton');
 
+    uploadButton.addEventListener('click', async () => {
+        const formData = new FormData();
+
+        for (let i = 0; i < input.files.length; i++) {
+            formData.append('files', input.files[i]);
+        }
+
+        try {
+            const response = await fetch('http://localhost:8080/Back_End_war/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            console.log(await response.text());
+        } catch (error) {
+            console.error(error);
+        }
     });
 
 </script>
