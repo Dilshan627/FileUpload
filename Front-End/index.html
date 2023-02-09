@@ -57,6 +57,7 @@
     <div class="view-container">view</div>
     <div class="input-container">
         <form id="formData" >
+            <img id="img" src='http://localhost:8080/SPRING_FILE_UPLOADER_BACK_END_war_exploded/upload/get'>
             <input type="file" name="file"/>
             <button class="btn" id="btnUpload">Upload Files</button>
         </form>
@@ -74,7 +75,7 @@
         console.log("ghvghv")
 
         $.ajax({
-            url: baseURL + "photos",
+            url: baseURL + "upload",
             method: "post",
             data: formData,
             dataType: "json"
