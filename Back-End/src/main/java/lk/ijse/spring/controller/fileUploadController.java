@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -29,7 +28,6 @@ public class fileUploadController {
             System.out.println(projectPath);
             uploadsDir.mkdir();
             myFile.transferTo(new File(uploadsDir.getAbsolutePath() + "/" + myFile.getOriginalFilename()));
-
 
             allImages.add("uploads/" + myFile.getOriginalFilename());
 
